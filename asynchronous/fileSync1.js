@@ -1,0 +1,1 @@
+Je suis un fichier écrit de manière synchrone grâce au module fs proposé par nodejs
