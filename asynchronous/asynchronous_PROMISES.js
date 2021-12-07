@@ -8,7 +8,7 @@ const p = new Promise((resolve, reject) => {});
 
 // fullfilled
 const p1 = new Promise((resolve, reject) => {
-  resolve({ username: "Nissim", id: 1 });
+  resolve({ username: "Pierre", id: 1 });
 });
 // the consumer :
 // p1.then((data) => {
@@ -41,14 +41,11 @@ function getUser() {
     setTimeout(() => {
       console.log("Getting info on user ...");
       const user = { username: "Nissim", id: 1 };
-      resolve(user);
+      // resolve(user);
+      reject("Could not fetch the corresponding user...");
     }, 3000);
   });
 }
-
-getUser().then((user) => {
-  console.log(user);
-});
 
 // function getRepos(user, cb) {
 //   setTimeout(() => {
@@ -58,6 +55,16 @@ getUser().then((user) => {
 //   }, 3000);
 // }
 
+function getRepos(user) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Getting repos from user...");
+      const repos = ["Repo 1", "Repo 2", "Repo 3"];
+      resolve(repos);
+    }, 3000);
+  });
+}
+
 // function getComments(repo, cb) {
 //   //simulate db's access
 //   setTimeout(() => {
@@ -66,6 +73,28 @@ getUser().then((user) => {
 //     cb(comments); // we invoke the callback to send back the results
 //   }, 3000);
 // }
+
+function getComments(repo) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Getting comments on repo ..."); //spinner
+      const comments = ["Good job", "Very good", "Need some css improvements"]; // results of my request
+      resolve(comments); // we invoke the callback to send back the results
+    }, 3000);
+  });
+}
+
+getUser()
+  .then((user) => {
+    getRepos(user).then((repos) => {
+      getComments(repos[0]).then((comments) => {
+        console.log(comments);
+      });
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // getRepos needs to return a Promise with a success
 

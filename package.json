@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon game_plus_minus/app.js"
+    "start": "nodemon game_plus_minus/app.js",
+    "test": "node asynchronous/asynchronous_async_await.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "prompt": "^1.2.0",
     "prompt-sync": "^4.2.0"
