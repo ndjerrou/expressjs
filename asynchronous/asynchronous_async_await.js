@@ -78,11 +78,84 @@ const url2 = "https://jsonplaceholder.typicode.com/users/2";
 
 // or...
 
+// ----------------------------------------------------------------------
+
 axios(url1)
   .then(({ data: users }) => {
     const user = users.find((user) => user.id === 2);
-    console.log("user = ", user);
+    // console.log("user = ", user);
   })
   .catch((err) => {
-    console.log(err.message);
+    // console.log(err.message);
   });
+
+// Transformation with async await - sucre syntaxique pour éviter d'utiliser les Promises
+
+// const getUsers = async () => {
+//   const { data } = await axios(url1);
+//   console.log(data);
+// };
+
+// getUsers();
+// console.log("après ma fonction getUsers");
+
+// How to handle the errors ? we use the try catch block
+
+const getUsers = async () => {
+  try {
+    const { data } = await axios(url1 + "/kikoo");
+    console.log(data);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// getUsers();
+
+// Exercice
+
+// Consulter l'api POKEMON
+
+// Afficher en log une ou plusieurs infos qui vous intéresse
+
+// 1 - gestion avec des Promises
+
+// 2 - gestion avec async await
+
+// ------------------------------------------------------------------------------ //
+
+// Correction
+
+// With promises
+
+// const fetchPokemon = (pokemon) => {
+//   const urlPokemon = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+
+//   axios(urlPokemon)
+//     .then(({ data: pokemon }) => {
+//       console.log(pokemon);
+//     })
+//     .catch((err) => console.log(err.message));
+// };
+
+// fetchPokemon("ditto");
+
+// or .........
+
+// With async version
+
+const fetchPokemon = async (pokemon) => {
+  const urlPokemon = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+
+  try {
+    const {
+      data: { abilities }
+    } = await axios(urlPokemon); // destructuring sur plusieurs niveaux
+
+    abilities.forEach(({ ability }) => console.log(ability.name));
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+fetchPokemon(process.argv[2]);
