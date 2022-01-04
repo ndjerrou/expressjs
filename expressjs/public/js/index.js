@@ -1,1 +1,7 @@
-console.log("Je suis chargé dans le browser");
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const city = e.target.elements.city.value;
+
+  // send a request to the back end
+});
