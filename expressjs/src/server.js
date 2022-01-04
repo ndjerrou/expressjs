@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/temperature/:city", (req, res) => {
+  console.log(req.params.city);
   res.send("ok");
 });
 

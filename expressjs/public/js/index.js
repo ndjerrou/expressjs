@@ -4,4 +4,5 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const city = e.target.elements.city.value;
 
   // send a request to the back end
+  axios(`/temperature/${city}`);
 });
