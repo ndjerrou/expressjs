@@ -1,6 +1,9 @@
+const path = require("path");
 const express = require("express");
 
 const app = express();
+
+const publicDirectoryPath = path.join(__dirname, "../public");
 
 //endpoints = routes
 app.get("/", (req, res) => {
